@@ -7,6 +7,7 @@ library(rgdal)
 library(fasterize)
 library(readxl)
 library(mapview)
+library(SpaDES)
 
 OutDir <- 'out'
 dataOutDir <- file.path(OutDir,'data')

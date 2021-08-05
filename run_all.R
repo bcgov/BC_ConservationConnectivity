@@ -18,9 +18,9 @@ source("01_load.R")
 #file should be in the 'SpatialDir' directory and named 'resistance_surface'
 
 #Clips input too AOI - current options include:
-AOI <- ws %>%
-  filter(SUB_SUB_DRAINAGE_AREA_NAME == "Bulkley")
-#AOI <- BCr
+#AOI <- ws %>%
+#  filter(SUB_SUB_DRAINAGE_AREA_NAME == "Bulkley")
+AOI <- BCr
 #AOI <- ESI
 
 #resolution of analysis - default is 50km moving window after McRae et al 2016
@@ -30,7 +30,7 @@ pixSize<-10 #in hectares - changes resolution of grids but will maintain OmniRad
 source("02_clean.R")
 
 #set run directory for omniscape
-RunDir<-"Test20"
+RunDir<-"Test31"
 
 #HFootprint - is a potentially aggregated or clipped file from original resistance_surface
 resistance_surface<- HFootprint
@@ -39,6 +39,11 @@ source_surface<-parks2017R
 #source_surface<- raster(file.path(ConnDir,'source.asc'))
 writeRaster(resistance_surface, filename=file.path(ConnDir,'resistance_surface.tif'), format="GTiff", overwrite=TRUE)
 writeRaster(source_surface, filename=file.path(ConnDir,'source_surface.tif'), format="GTiff", overwrite=TRUE)
+
+#run as tiles? for larger rasters
+NumTiles<-1
+#source("03_analysis_tiles.R")
+
 
 source("03_Omni_analysis.R")
 

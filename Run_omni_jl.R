@@ -1,15 +1,27 @@
+# Copyright 2021 Province of British Columbia
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
 
-#use double quotes
-#input directory /Users/darkbabine/biodiveristy/omni
-#writes to ...
+#########
+#Notes on calling Omniscape
+#Omniscape requires simple absolute directory names - no spaces or brackets, however complex relative directory names are fine
+#Julia - which is used to run Omniscape must be installed and be in your path:
 #sudo ln -s /Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia /usr/local/bin/julia
+#Ominscape uses an 'ini' file which requires "" not single ''
 
 #Resistence and Sourcec rasters
-layer <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/resistance.asc')
-sites <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/source.asc')
+#layer <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/resistance.asc')
+#sites <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/source.asc')
 #Reclassify as required
 
-#Build Omniscape file and target directory #Needs to be simple directory name - no spaces or brackets
 
 RunDir<-"Test5"
 #dir.create(file.path(ConnDir,RunDir),showWarnings=FALSE) # Ominscape will create
@@ -42,7 +54,7 @@ paste("project_name = ",file.path(ConnDir,RunDir),sep=''),
 configLocation<-file.path(ConnDir,"config.ini")
 cat(OS_ini, sep="\n", file=configLocation)
 
-script <- c('using Omniscape',  
+script <- c('using Omniscape',
             paste('run_omniscape(',configLocation,')',sep='"'))
 cat(script, sep="\n", file="script.jl")
 #cat(script, sep="\n", file=file.path(ConnDir,"script.jl"))
@@ -66,13 +78,13 @@ return(rdist)
 run_omniscape("/Users/darkbabine/ProjectLibrary/omni/test/config.ini")
 
 OmniDir <- file.path('/Users/darkbabine/ProjectLibrary/omni/test')
-Julia_exe <- 'julia include("script_path.jl")' 
+Julia_exe <- 'julia include("script_path.jl")'
 system(Julia_exe)
 
 Julia_exe <- ('julia script.jl')
 system(Julia_exe)
 
-julia 
+julia
 
 script.jl
 using Omniscape
@@ -116,12 +128,12 @@ runCS <- function(layer, sites){
     stop("sites are do not fall within unique cells")
   }
   sites <- rasterize(x = sites,y = layer)
-  
-  
+
+
   dir.create("CS",showWarnings=FALSE)
   writeRaster(sites,"CS/sites_rast.asc",overwrite=TRUE)
   writeRaster(layer,"CS/resis_rast.asc",overwrite=TRUE)
-  CS_ini <- c("[circuitscape options]",            
+  CS_ini <- c("[circuitscape options]",
               "data_type = raster",
               "scenario = pairwise",
               paste(c("point_file =",

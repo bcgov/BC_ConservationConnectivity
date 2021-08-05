@@ -10,9 +10,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#Omniscape is an implementatio of Circuitscape that runs on the 'Julia' platform
-#to run julia needs to be in path - sudo ln -s /Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia /usr/local/bin/julia
-#use double quotes for Omniscape ini file
+#########
+#Notes on Omniscape
+#Omniscape is an implementation of Circuitscape that runs on the 'Julia' platform
+#Omniscape requires simple absolute directory names - no spaces or brackets, however complex relative directory names are fine
+#Julia - must be installed and be in your path:
+#sudo ln -s /Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia /usr/local/bin/julia
+#Ominscape uses an 'ini' file which requires "" not single ''
+
+#Resistence and Sourcec rasters
+#layer <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/resistance.asc')
+#sites <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/source.asc')
+#Reclassify as required
 
 #Build ini file for Omniscape
 OS_ini<-c("[Input files]",
