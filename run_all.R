@@ -24,26 +24,26 @@ AOI <- BCr
 #AOI <- ESI
 
 #resolution of analysis - default is 50km moving window after McRae et al 2016
-#1 ha cells requires 500 cells to have a 50km radius
-OmniRadius<-500000
+#1 ha cells requires 500 cells to have a 50km (50,000m) radius
+OmniRadius<-50 #in km
 pixSize<-10 #in hectares - changes resolution of grids but will maintain OmniRadius
+BlockSize<-3 #odd number - looks at blocks of 9 pixels instead of 1
 source("02_clean.R")
 
 #set run directory for omniscape
-RunDir<-"Test31"
+RunDir<-"Test42"
 
-#HFootprint - is a potentially aggregated or clipped file from original resistance_surface
-resistance_surface<- HFootprint
-#resistance_surface<- raster(file.path(ConnDir,'resistance.asc'))
-source_surface<-parks2017R
-#source_surface<- raster(file.path(ConnDir,'source.asc'))
+#resistance_surface and source_suface  - are a potentially aggregated or clipped file from original surfaces
+resistance_surface<- resistance_surface_AOI
+source_surface<-source_surface_AOI
+
+#Write out surfaces so that Omniscape can read them
 writeRaster(resistance_surface, filename=file.path(ConnDir,'resistance_surface.tif'), format="GTiff", overwrite=TRUE)
 writeRaster(source_surface, filename=file.path(ConnDir,'source_surface.tif'), format="GTiff", overwrite=TRUE)
 
-#run as tiles? for larger rasters
+#run as tiles? for larger rasters - still testing to see if required
 NumTiles<-1
 #source("03_analysis_tiles.R")
-
 
 source("03_Omni_analysis.R")
 

@@ -28,8 +28,8 @@ OS_ini<-c("[Input files]",
           paste("resistance_file = ",file.path(ConnDir,"resistance_surface.tif")),
           paste("source_file = ", file.path(ConnDir,"source_surface.tif")),
           "[Options]",
-          "block_size = 1",
-          paste("radius = ",500/pixSize),
+          paste("block_size =", BlockSize),
+          paste("radius = ",OmniRadius*10/pixSize),
           "buffer = 0",
           "source_threshold = 0",
           paste("project_name = ",file.path(ConnDir,RunDir),sep=''),
@@ -53,6 +53,10 @@ script <- c('using Omniscape',
 #Julia is happier if jl file is in directory that Julia is launched from
 cat(script, sep="\n", file="script.jl")
 
+#Set up parallel processing
+Julia_Threads<-'export JULIA_NUM_THREADS=4'
+system(Julia_Threads)
+#Launch Julia
 Julia_exe <- ('julia script.jl')
 system(Julia_exe)
 
