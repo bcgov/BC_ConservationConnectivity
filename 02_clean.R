@@ -10,10 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#Reclassify load as required
-#writeRaster(sites,file.path(ConnDir,"sites_rast.asc"),overwrite=TRUE)
-#writeRaster(layer,file.path(ConnDir,"resis_rast.asc"),overwrite=TRUE)
-
 parks2017R <-raster(file.path(spatialOutDir,"parks2017R.tif"), format="GTiff") %>%
   mask(AOI) %>%
   crop(AOI) %>%

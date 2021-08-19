@@ -18,11 +18,6 @@
 #sudo ln -s /Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia /usr/local/bin/julia
 #Ominscape uses an 'ini' file which requires "" not single ''
 
-#Resistence and Sourcec rasters
-#layer <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/resistance.asc')
-#sites <- raster('/Users/darkbabine/ProjectLibrary/omni/test/input/source.asc')
-#Reclassify as required
-
 #Build ini file for Omniscape
 OS_ini<-c("[Input files]",
           paste("resistance_file = ",file.path(ConnDir,"resistance_surface.tif")),
@@ -42,7 +37,7 @@ OS_ini<-c("[Input files]",
           "write_as_tif = true",
           "parallelize = true")
 
-#write ini file to disk at 'configlocation'
+#write ini file to disk at 'configLocation'
 configLocation<-file.path(ConnDir,"config.ini")
 cat(OS_ini, sep="\n", file=configLocation)
 

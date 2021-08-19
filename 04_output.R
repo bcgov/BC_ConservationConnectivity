@@ -12,7 +12,6 @@
 
 file.path(ConnDir,RunDir)
 
-
 normalized_cum_currmap <- raster(file.path(ConnDir,RunDir,'normalized_cum_currmap.tif'))
 cum_currmap <- raster(file.path(ConnDir,RunDir,'cum_currmap.tif'))
 flow_potential <- raster(file.path(ConnDir,RunDir,'flow_potential.tif'))

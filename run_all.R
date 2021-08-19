@@ -31,7 +31,7 @@ BlockSize<-3 #odd number - looks at blocks of 9 pixels instead of 1
 source("02_clean.R")
 
 #set run directory for omniscape
-RunDir<-"Test42"
+RunDir<-"Test43"
 
 #resistance_surface and source_suface  - are a potentially aggregated or clipped file from original surfaces
 resistance_surface<- resistance_surface_AOI
@@ -41,7 +41,7 @@ source_surface<-source_surface_AOI
 writeRaster(resistance_surface, filename=file.path(ConnDir,'resistance_surface.tif'), format="GTiff", overwrite=TRUE)
 writeRaster(source_surface, filename=file.path(ConnDir,'source_surface.tif'), format="GTiff", overwrite=TRUE)
 
-#run as tiles? for larger rasters - still testing to see if required
+#run as tiles? for larger rasters - still testing
 NumTiles<-1
 #source("03_analysis_tiles.R")
 
