@@ -22,6 +22,8 @@ Prov_crs<-crs(bc)
 #Provincial Raster to place rasters in the same reference
 BCr_file <- file.path(spatialOutDir,"BCr.tif")
 if (!file.exists(BCr_file)) {
+  BC<-bcmaps::bc_bound_hres(class='sf')
+  saveRDS(BC,file='tmp/BC')
   BCr <- fasterize(bcmaps::bc_bound_hres(class='sf'),ProvRast)
   writeRaster(BCr, filename=BCr_file, format="GTiff", overwrite=TRUE)
   ProvRast<-raster(nrows=15744, ncols=17216, xmn=159587.5, xmx=1881187.5,
@@ -31,6 +33,7 @@ if (!file.exists(BCr_file)) {
   writeRaster(ProvRast, filename=file.path(spatialOutDir,'ProvRast'), format="GTiff", overwrite=TRUE)
 } else {
   BCr <- raster(BCr_file)
+  BC <-readRDS('tmp/BC')
   ProvRast<-raster(file.path(spatialOutDir,'ProvRast.tif'))
 }
 
@@ -97,6 +100,23 @@ ws <- get_layer("wsc_drainages", class = "sf") %>%
 st_crs(ws)<-3005
 saveRDS(ws, file = "tmp/ws")
 write_sf(ws, file.path(spatialOutDir,"ws.gpkg"))
+
+#Load map additions
+#EcoRegions
+EcoRegions<-bcmaps::ecoregions()
+
+#Map features FWLKSPL_polygon
+lakes<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/lakes_bc/CWB_LAKES/CWB_LAKES.shp'))
+saveRDS(lakes, file = 'tmp/lakes')
+
+Blakes<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/FWLKSPL_polygon/FWLKSPL_polygon.shp'))
+saveRDS(Blakes, file = 'tmp/Blakes')
+
+rivers<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/doubleline_rivers_bc/CWB_RIVERS/CWB_RIVERS.shp'))
+saveRDS(rivers, file = 'tmp/rivers')
+
+#Hill shade for draping
+HillShade<-raster(file.path(GISLibrary,'GRIDS/hillshade_BC.tif'))
 
 
 

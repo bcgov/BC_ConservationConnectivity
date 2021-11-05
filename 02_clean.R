@@ -40,3 +40,30 @@ hist(resistance_surface_AOI,
      main = "Distribution of Human Footprint",
      xlab = "Score", ylab = "Frequency",
      col = "springgreen")
+
+#Clip map features
+parks2017<-readRDS(file= 'tmp/parks2017') %>%
+  st_buffer(dist=0) %>%
+  st_intersection(AOI)
+saveRDS(parks2017, file = 'tmp/AOI/parks2017')
+
+HillShade <-raster(file.path(GISLibrary,'GRIDS/hillshade_BC.tif')) %>%
+  mask(AOI) %>%
+  crop(AOI)
+
+lakes<-readRDS(file= 'tmp/lakes') %>%
+  st_buffer(dist=0) %>%
+  st_intersection(AOI)
+saveRDS(lakes, file = 'tmp/AOI/lakes')
+
+Blakes<-readRDS(file= 'tmp/Blakes') %>%
+  st_buffer(dist=0) %>%
+  st_intersection(AOI)
+saveRDS(Blakes, file = 'tmp/AOI/Blakes')
+
+rivers<-readRDS(file= 'tmp/rivers') %>%
+  st_buffer(dist=0) %>%
+  st_intersection(AOI)
+saveRDS(rivers, file = 'tmp/AOI/rivers')
+
+

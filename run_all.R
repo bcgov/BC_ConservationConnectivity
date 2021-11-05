@@ -18,9 +18,9 @@ source("01_load.R")
 #file should be in the 'SpatialDir' directory and named 'resistance_surface'
 
 #Clips input too AOI - current options include:
-#AOI <- ws %>%
-#  filter(SUB_SUB_DRAINAGE_AREA_NAME == "Bulkley")
-AOI <- BCr
+AOI <- ws %>%
+  filter(SUB_SUB_DRAINAGE_AREA_NAME == "Bulkley")
+#AOI <- BC
 #AOI <- ESI
 
 #resolution of analysis - default is 50km moving window after McRae et al 2016

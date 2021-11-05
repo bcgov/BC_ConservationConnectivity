@@ -8,6 +8,8 @@ library(fasterize)
 library(readxl)
 library(mapview)
 library(SpaDES)
+library(ggnewscale)
+library(viridis)
 
 OutDir <- 'out'
 dataOutDir <- file.path(OutDir,'data')
@@ -15,13 +17,14 @@ tileOutDir <- file.path(dataOutDir,'tile')
 figsOutDir <- file.path(OutDir,'figures')
 spatialOutDir <- file.path(OutDir,'spatial')
 SpatialDir <- file.path('data','spatial')
-ConnDir <- file.path(spatialOutDir,'ConnData')
+
 DataDir <- 'data'
 WetspatialDir <- file.path('/Users/darkbabine/Dropbox (BVRC)/Projects/ESI/Wetlands/Assessment/Data')
 WetzinkData <- file.path('/Users/darkbabine/Dropbox (BVRC)/Projects/LUP/Wetzinkwa/Data/ColinCCWebAppData')
 RefugiaSpatialDir <- file.path('/Users/darkbabine/Dropbox (BVRC)/Projects/ClimateChange/BiodiversityCC/ClimateRefugia')
 ESIDir <- file.path('/Users/darkbabine/Dropbox (BVRC)/Projects/ESI')
-
+GISLibrary<- file.path('/Users/darkbabine/ProjectLibrary/Library/GISFiles/BC')
+ConnDir<-file.path(spatialOutDir,'ConnData')
 
 dir.create(file.path(OutDir), showWarnings = FALSE)
 dir.create(file.path(dataOutDir), showWarnings = FALSE)
