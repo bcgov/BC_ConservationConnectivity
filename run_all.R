@@ -21,7 +21,6 @@ source("01_load.R")
 AOI <- ws %>%
   filter(SUB_SUB_DRAINAGE_AREA_NAME == "Bulkley")
 #AOI <- BC
-#AOI <- ESI
 
 #resolution of analysis - default is 50km moving window after McRae et al 2016
 #1 ha cells requires 500 cells to have a 50km (50,000m) radius
