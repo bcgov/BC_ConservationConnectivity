@@ -21,10 +21,13 @@ network.
 ### Usage
 
 There are four core scripts that are required for the analysis, a
-run_all.R script is used to control their execution:
+run_all.R script is used to control their execution, an additional scipt
+03_analysis_tiles.R is provided to explore the use of tiles to increase
+analysis resolution:
 
 -   01_load.R
 -   02_clean.R
+-   03_analysis_tiles.R
 -   03_Omni_analysis.R
 -   04_output.R
 
@@ -32,7 +35,7 @@ run_all.R script is used to control their execution:
 
 This project is part of a Provincial conservation assessment being led
 by the Ministry of Environment and Climate Change Strategy. The analysis
-is exploratory and will be added to and updated over the coming months.
+is exploratory.
 
 ### Getting Help or Reporting an Issue
 

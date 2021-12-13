@@ -31,9 +31,9 @@ BlockSize<-3 #odd number - looks at blocks of 9 pixels instead of 1
 source("02_clean.R")
 
 #set run directory for omniscape
-RunDir<-"Test43"
+RunDir<-"Test44"
 
-#resistance_surface and source_suface  - are a potentially aggregated or clipped file from original surfaces
+#resistance_surface and source_surface  - are a potentially aggregated or clipped file from original surfaces
 resistance_surface<- resistance_surface_AOI
 source_surface<-source_surface_AOI
 
@@ -47,7 +47,6 @@ NumTiles<-1
 
 source("03_Omni_analysis.R")
 
+#Various routines to explore data distribution and quality
 source("04_output.R")
-
-cellStats(flow_potential,range)
 

@@ -59,30 +59,12 @@ if (!file.exists(parks2017R_file)) {
 
 #######
 #Potential AOIs for testing
-#ESI boundary - for testing, etc.
-ESI_file <- file.path("tmp/ESI")
-if (!file.exists(ESI_file)) {
-  #Load ESI boundary
-  ESIin <- read_sf(file.path(ESIDir,'Data/Skeena_ESI_Boundary'), layer = "ESI_Skeena_Study_Area_Nov2017") %>%
-    st_transform(3005)
-  ESI <- st_cast(ESIin, "MULTIPOLYGON")
-  saveRDS(ESI, file = ESI_file)
-} else
-  ESI<-readRDS(file = ESI_file)
-
 #Ecosections
 EcoS_file <- file.path("tmp/EcoS")
 ESin <- read_sf(file.path(SpatialDir,'Ecosections/Ecosections.shp')) %>%
   st_transform(3005)
 EcoS <- st_cast(ESin, "MULTIPOLYGON")
 saveRDS(EcoS, file = EcoS_file)
-
-#SkeenaSalmonStudyBoundary
-SalmS_file <- file.path("tmp/SalmS")
-SalmSin <- read_sf(file.path(SpatialDir,'SkeenaSalmonStudyBd/SkeenaSalmonStudyBd.shp')) %>%
-  st_transform(3005)
-SalmS <- st_cast(SalmSin, "MULTIPOLYGON")
-saveRDS(SalmS, file = SalmS_file)
 
 # Download BEC - # Gets bec_sf zone shape
 BEC_file <- 'tmp/bec_sf'
@@ -101,22 +83,6 @@ st_crs(ws)<-3005
 saveRDS(ws, file = "tmp/ws")
 write_sf(ws, file.path(spatialOutDir,"ws.gpkg"))
 
-#Load map additions
-#EcoRegions
-EcoRegions<-bcmaps::ecoregions()
-
-#Map features FWLKSPL_polygon
-lakes<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/lakes_bc/CWB_LAKES/CWB_LAKES.shp'))
-saveRDS(lakes, file = 'tmp/lakes')
-
-Blakes<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/FWLKSPL_polygon/FWLKSPL_polygon.shp'))
-saveRDS(Blakes, file = 'tmp/Blakes')
-
-rivers<-read_sf(file.path(GISLibrary,'shapefiles/WaterFeatures/doubleline_rivers_bc/CWB_RIVERS/CWB_RIVERS.shp'))
-saveRDS(rivers, file = 'tmp/rivers')
-
-#Hill shade for draping
-HillShade<-raster(file.path(GISLibrary,'GRIDS/hillshade_BC.tif'))
 
 
 

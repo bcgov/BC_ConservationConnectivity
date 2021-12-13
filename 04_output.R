@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-
-
 normalized_cum_currmap <- raster(file.path(ConnDir,RunDir,'normalized_cum_currmap.tif'))
 cum_currmap <- raster(file.path(ConnDir,RunDir,'cum_currmap.tif'))
 flow_potential <- raster(file.path(ConnDir,RunDir,'flow_potential.tif'))
@@ -99,8 +97,6 @@ rclmat <- matrix(m, ncol=3, byrow=TRUE)
 norm_cum_currSM1rcls <- reclassify(norm_cum_currSM1, rclmat)
 writeRaster(norm_cum_currSM1rcls, filename=file.path(spatialOutDir,'norm_cum_currSM1rcls'), format="GTiff", overwrite=TRUE)
 
-
-
 hist(norm_cum_curr,
      main = "Distribution of normalized_cum_currmap values",
      xlab = "Value", ylab = "Frequency",
@@ -111,78 +107,4 @@ freq(normalized_cum_currmap)
 
 #normalize (normalized_cum_currmap)
 
-
-####Plotting
-#resistance_surface_AOI, source_surface_AOI
-
-resistance_surface_AOI<-raster(file.path(ConnDir,"resistance_surface.tif"))
-resistance_surface_pts <- rasterToPoints(resistance_surface_AOI, spatial = TRUE)
-# Then to a dataframe with colours - dont need colours for this iteration
-resistance_surface_df<- data.frame(resistance_surface_pts)
-
-
-
-%>%
-  left_join(resistance_LUT_colour, by=c('BEC_zone_2080s'='VALUE'))
-
-rng<-range(resistance_surface_df$resistance_surface)
-lim <- ceiling(log(abs(rng), 2))
-b <- sort(c(0, unique(unlist(mapply(function(x, y) y*2^(0:x), lim, sign(rng))))))
-b[1] <- rng[1]
-b[length(b)] <- rng[2]
-
-df<-
- tt<- getJenksBreaks(resistance_surface_df$resistance_surface, 10, subset = NULL)
-
-names <- c("Low", "Medium", "High")
-
-#Cut the vector using the break points:
-
-
-
-ggplot() +
-  #plot BGC zones that persist in 2080
-  geom_raster(data = resistance_surface_df, aes(x = x, y = y, fill = resistance_surface)) +
-  #Colour using bcmaps bec colours
-  #scale_fill_manual(values = bcmaps::bec_colours())
-  scale_fill_viridis(option="rocket", direction=-1)
-
-
-
-resistance_surface_pts <- rasterToPoints(resistance_surface_AOI, spatial = TRUE)
-# Then to a dataframe with colours - dont need colours for this iteration
-resistance_surface_df<- data.frame(resistance_surface_pts)
-
-%>%
-  left_join(BEC1970P_LUT_colour, by=c('BEC_zone_2080s'='VALUE'))
-
-
-png(file=file.path(figsOutDir,"Zone2080.png"), units='mm', res = 1200)
-#pdf(file=file.path(figsOutDir,"Zone2080.pdf"))
-ggplot() +
-  #plot Human Footprint
-  geom_raster(data = resistance_surface_AOI, aes(x = x, y = y, fill = ZONE), alpha=0.4) +
-  #Colour using bcmaps bec colours
-  scale_fill_manual(values = bcmaps::bec_colours()) +
-  #add hill shade
-  new_scale_fill() +
-  geom_tile(data=HillShade_spdf, aes(x = x, y = y, fill = hillshade_BC), alpha=0.4, show.legend=FALSE) +
-  scale_fill_gradient(low='black', high='white')  +
-  ggtitle("BGC Zone - 2080") +
-  #add parks
-  geom_sf(data=parks2017, fill = 'green', color = 'green', alpha=0.05) +
-  #add study area boundary
-  geom_sf(data=AOI, fill = NA, color= "black" ) +
-  #add lakes and rivers
-  geom_sf(data=lakes, fill = 'lightblue', color= 'lightblue' ) +
-  geom_sf(data=rivers, fill = 'lightblue', color= 'lightblue' ) +
-  #Turn off axis and titles
-  theme(axis.title = element_blank(),
-        axis.ticks=element_blank(),
-        axis.text=element_blank()) +
-  #set background to blank
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank())
-dev.off()
 
