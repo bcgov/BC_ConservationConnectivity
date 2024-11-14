@@ -3,13 +3,14 @@ library(dplyr)
 library(readr)
 library(raster)
 library(bcmaps)
-library(rgdal)
+#library(rgdal)
 library(fasterize)
 library(readxl)
 library(mapview)
 library(SpaDES)
 library(ggnewscale)
 library(viridis)
+library(JuliaCall)
 
 OutDir <- 'out'
 dataOutDir <- file.path(OutDir,'data')
@@ -38,6 +39,7 @@ dir.create(file.path(ConnDir), showWarnings = FALSE)
 
 #OmniDir <- file.path('/Users/darkbabine/ProjectLibrary/omni')
 
-
+#julia set up
+JuliaCall::install_julia(prefix="./")
 
 
