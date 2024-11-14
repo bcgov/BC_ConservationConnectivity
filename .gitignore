@@ -64,3 +64,4 @@ internal.R
 /archive/
 #QGIS files
 *.qgz
+/1.9.4
