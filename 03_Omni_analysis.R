@@ -52,7 +52,39 @@ cat(script, sep="\n", file="script.jl")
 Julia_Threads<-'export JULIA_NUM_THREADS=4'
 system(Julia_Threads)
 #Launch Julia
-Julia_exe <- ('julia script.jl')
+Julia_exe <- ('script.jl')
 system(Julia_exe)
 
+#steps for julia
 
+
+
+julia_setup(JULIA_HOME=paste0(getwd(),"/1.9.4/julia-1.9.4/bin"))
+JuliaCall::julia_setup(rebuild = TRUE)
+julia_install_package("DataFrames")
+julia_library("Omniscape")
+
+JuliaCall::julia_pkg_import("Circuitscape",
+                            func_list= "compute"
+                            ("path/to/config/file.ini"))
+julia_exists
+
+
+
+julia_call("Circuitscape",list("compute",configLocation))
+
+julia_source(file_name = Julia_exe )
+
+if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
+  ## doing initialization and automatic installation of Julia if necessary
+  julia_setup(installJulia = TRUE)
+  julia_install_package("Omniscape")
+  julia_installed_package("Omniscape")
+  julia_install_package_if_needed("Omniscape")
+  julia_update_package("Omniscape")
+  julia_library("Omniscape")
+}
+
+julia_install_package("Pkg")
+
+julia_console()
