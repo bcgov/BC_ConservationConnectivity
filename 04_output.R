@@ -14,9 +14,9 @@ normalized_cum_currmap <- raster(file.path(ConnDir,RunDir,'normalized_cum_currma
 cum_currmap <- raster(file.path(ConnDir,RunDir,'cum_currmap.tif'))
 flow_potential <- raster(file.path(ConnDir,RunDir,'flow_potential.tif'))
 
-plot(normalized_cum_currmap)
-plot(cum_currmap)
-plot(flow_potential)
+mapview(normalized_cum_currmap)
+mapview(cum_currmap)
+mapview(flow_potential)
 
 cellStats(flow_potential,range)
 cellStats(normalized_cum_currmap,range)
@@ -56,6 +56,7 @@ m <- c(0,1,1, 1,2,2, 2,3,3, 3,4,4)
 rclmat <- matrix(m, ncol=3, byrow=TRUE)
 norm_cum_currSM1rcls <- reclassify(norm_cum_currSM1, rclmat)
 writeRaster(norm_cum_currSM1rcls, filename=file.path(spatialOutDir,'norm_cum_currSM1rcls'), format="GTiff", overwrite=TRUE)
+mapview(norm_cum_currSM1rcls)
 
 norm_cum_currSM3 <- focal(norm_cum_curr, w=matrix(1, 3, 3), mean)
 writeRaster(norm_cum_currSM3, filename=file.path(spatialOutDir,'norm_cum_currSM3'), format="GTiff", overwrite=TRUE)
@@ -67,11 +68,13 @@ writeRaster(norm_cum_currSM3rcls, filename=file.path(spatialOutDir,'norm_cum_cur
 #Nope
 norm_cum_currSMdisag <- disaggregate(norm_cum_curr, 5)
 writeRaster(norm_cum_currSMdisag, filename=file.path(spatialOutDir,'norm_cum_currSMdisag'), format="GTiff", overwrite=TRUE)
+mapview(norm_cum_currSMdisag)
 
 #Use clump, then find units with only 1 member - make a new raster then assign values based on
 #largest neighbour?
 norm_cum_currClump<-clump(norm_cum_curr, filename="", directions=8, gaps=TRUE)
 writeRaster(norm_cum_currClump, filename=file.path(spatialOutDir,'norm_cum_currClump'), format="GTiff", overwrite=TRUE)
+mapview(norm_cum_currClump)
 
 #################
 # Flow potential - to support the intact mapping

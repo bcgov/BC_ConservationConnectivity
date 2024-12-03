@@ -34,7 +34,7 @@ analysis resolution:
 ### Project Status
 
 This project is part of a Provincial conservation assessment being led
-by the Ministry of Environment and Climate Change Strategy. The analysis
+by the Ministry of Water, Land and Resource Stewardship's Biodiversity and Ecosystems Branch. The analysis
 is exploratory.
 
 ### Getting Help or Reporting an Issue
