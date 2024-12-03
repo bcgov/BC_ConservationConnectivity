@@ -41,13 +41,14 @@ if (!file.exists(BCr_file)) {
 #Potential AOIs for testing
 #Ecosections
 EcoS_file <- file.path("tmp/EcoS")
-ESin <- read_sf(file.path(SpatialDir,'Ecosections/Ecosections.shp')) %>%
-  st_transform(3005)
+ESin <- read_sf(file.path(ProvData,'Boundaries/Ecosections/Ecosections.shp')) %>%
+  #st_transform(3005)
+  st_set_crs(3005)
 EcoS <- st_cast(ESin, "MULTIPOLYGON")
 saveRDS(EcoS, file = EcoS_file)
 
 #Watersheds
-ws <- get_layer("wsc_drainages", class = "sf") %>%
+ws <- get_layer("wsc_drainages") %>%
   dplyr::select(SUB_DRAINAGE_AREA_NAME, SUB_SUB_DRAINAGE_AREA_NAME) %>%
   dplyr::filter(SUB_DRAINAGE_AREA_NAME %in% c("Nechako", "Skeena - Coast"))
 st_crs(ws)<-3005
