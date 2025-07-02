@@ -30,7 +30,7 @@ BlockSize<-3 #odd number - looks at blocks of 9 pixels instead of 1
 source("02_clean.R")
 
 #set run directory for omniscape
-RunDir<-"Test44"
+RunDir<-"Test50"
 
 #resistance_surface and source_surface  - are a potentially aggregated or clipped file from original surfaces
 resistance_surface<- resistance_surface_AOI
