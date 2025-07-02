@@ -37,8 +37,8 @@ resistance_surface<- resistance_surface_AOI
 source_surface<-source_surface_AOI
 
 #Write out surfaces so that Omniscape can read them
-writeRaster(resistance_surface, filename=file.path(ConnDir,'resistance_surface.tif'), format="GTiff", overwrite=TRUE)
-writeRaster(source_surface, filename=file.path(ConnDir,'source_surface.tif'), format="GTiff", overwrite=TRUE)
+writeRaster(resistance_surface, filename=file.path(ConnDir,'resistance_surface.tif'), overwrite=TRUE)
+writeRaster(source_surface, filename=file.path(ConnDir,'source_surface.tif'), overwrite=TRUE)
 
 #run as tiles? for larger rasters - still testing
 NumTiles<-1
